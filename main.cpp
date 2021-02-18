@@ -9,9 +9,76 @@ enum class Compass {N, S, W, E};
 
 // Write your code here
 class GPS {
+public:
+  GPS() {
+    latitude = 0.0;
+    longitude = 0.0;
+    latitudeDirection = Compass::N;
+    longitudeDirection = Compass::W;
+  };
 
+  GPS(double lat, double lng) {
+    if(lat > 90  || lat < 0) {
+      latitude = 0.0;
+    } else {
+      latitude = lat;
+    }
+    if(lng > 180 || lng < 0) {
+      longitude = 0.0;
+    } else {
+      longitude = lng;
+    }
+
+    latitudeDirection = Compass::N;
+    longitudeDirection = Compass::W;
+  }
+        
+  GPS(double lat, Compass cmpLat, double lng, Compass cmpLng) {
+    if(lat > 90  || lat < 0) {
+      latitude = 0.0;
+    } else {
+      latitude = lat;
+    }
+    if(lng > 180 || lng < 0) {
+      longitude = 0.0;
+    } else {
+      longitude = lng;
+    }
+    if(cmpLat == Compass::W || cmpLat == Compass::E) {
+      latitudeDirection = Compass::N;
+    } else {
+      latitudeDirection = cmpLat;
+    }
+
+    if(cmpLng == Compass::N || cmpLng == Compass:: S) {
+      longitudeDirection = Compass::W;
+    } else {
+      longitudeDirection = cmpLng;
+    }
+  }
+
+  double getLatitude() {
+    return latitude;
+  }
+
+  double getLongitude() {
+    return longitude;
+  }
+
+  Compass getLatitudeDirection() {
+    return latitudeDirection;
+  }
+
+  Compass getLongitudeDirection() {
+    return longitudeDirection;
+  }
+
+private:
+  double latitude;
+  double longitude;
+  Compass latitudeDirection;
+  Compass longitudeDirection;
 };
-
 //------------------------------
 //   DO NOT MODIFY TEST CASES
 //------------------------------
